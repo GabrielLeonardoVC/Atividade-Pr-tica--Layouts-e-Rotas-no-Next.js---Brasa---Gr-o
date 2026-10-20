@@ -1,9 +1,9 @@
-import type { NextConfig } from "next";
+﻿import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
+  // Configuração padrão do App Router.
+  // As rotas / e /cardapio são estáticas (prerenderizadas) e o <header>/<footer>
+  // compartilhados ficam em src/app/layout.tsx.
 };
 
 export default nextConfig;
