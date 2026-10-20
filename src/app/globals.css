@@ -109,6 +109,37 @@ ul {
   padding: 0;
 }
 
+/* Foco visível para navegação por teclado */
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.site-footer :focus-visible {
+  outline-color: var(--amber);
+}
+
+/* Link de salto: só aparece quando focado */
+.skip-link {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  z-index: 100;
+  transform: translate(-50%, -140%);
+  background: var(--ink);
+  color: #fff;
+  padding: 12px 22px;
+  border-radius: 0 0 12px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: transform 0.18s ease;
+}
+
+.skip-link:focus {
+  transform: translate(-50%, 0);
+}
+
 /* 3. Utilitários ------------------------------------------------------------ */
 .container {
   width: 100%;

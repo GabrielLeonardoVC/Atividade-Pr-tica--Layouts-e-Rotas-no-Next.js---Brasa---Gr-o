@@ -32,6 +32,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       data-scroll-behavior="smooth"
     >
       <body>
+        <a href="#conteudo" className="skip-link">
+          Pular para o conteúdo
+        </a>
+
         {/* ================= CABEÇALHO COMPARTILHADO ================= */}
         <header className="site-header">
           <div className="container site-header__inner">
@@ -72,7 +76,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 
         <div className="site-wrapper">
           {/* ============= CONTEÚDO DINÂMICO DE CADA ROTA ============ */}
-          <main className="site-main">{children}</main>
+          <main className="site-main" id="conteudo">
+            {children}
+          </main>
 
           {/* ================== RODAPÉ COMPARTILHADO =================== */}
           <footer className="site-footer">

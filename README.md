@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Brasa & Grão — Atividade Prática: Layouts e Rotas no Next.js
 
-## Getting Started
+Site da hamburgueria e cafeteria artesanal **Brasa & Grão**, construído como prática de
+**Rotas (App Router)**, **Layouts (`layout.tsx`)** e **Estilização** no Next.js, a partir do
+protótipo Figma.
 
-First, run the development server:
+🔗 Protótipo: [Figma — Ecommerce Website Design (Community)](https://www.figma.com/design/9S5LaN2QHqmOi5AcAgbrQ5/Ecommerce-Website-Design--Community-?node-id=22-474)
+
+---
+
+## Como rodar
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```bash
+npm run build    # build de produção
+npm start        # sobe o build de produção
+npm run lint     # ESLint
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Rotas
 
-## Learn More
+| Rota             | Arquivo                     | Conteúdo                                                       |
+| ---------------- | --------------------------- | -------------------------------------------------------------- |
+| `/`              | `src/app/page.tsx`          | Página **Início**: hero, diferenciais e "Os Mais Pedidos"       |
+| `/cardapio`      | `src/app/cardapio/page.tsx` | Página **Cardápio Completo**: banner, filtros e listagem        |
 
-To learn more about Next.js, take a look at the following resources:
+A navegação entre as duas rotas é feita com o componente `<Link>` do Next.js
+(`import Link from "next/link"`), que faz o roteamento no cliente sem recarregar a página.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Layout compartilhado
 
-## Deploy on Vercel
+O `<header>` e o `<footer>` são escritos **uma única vez** em `src/app/layout.tsx`,
+envolvendo o `{children}`:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+src/
+├── app/
+│   ├── globals.css          # tokens de design, componentes e responsivo
+│   ├── layout.tsx           # <header> + {children} + <footer>  (compartilhado)
+│   ├── page.tsx             # rota /
+│   ├── cardapio/
+│   │   └── page.tsx         # rota /cardapio
+│   ├── components/
+│   │   ├── ActiveRoute.tsx  # marca a rota atual para destacar o link ativo
+│   │   ├── MenuExplorer.tsx # filtros por categoria (Client Component)
+│   │   ├── ProductCard.tsx  # card vertical de lanche
+│   │   ├── SideCard.tsx     # card horizontal de acompanhamento
+│   │   └── icons.tsx        # ícones SVG da marca
+│   └── data/
+│       └── menu.ts          # dados do cardápio (fonte única de verdade)
+└── public/
+    └── images/              # fotos do cardápio
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Regra de ouro aplicada:** nenhum `page.tsx` repete `<header>` ou `<footer>`.
+As duas páginas herdam a estrutura completa do layout automaticamente.
+
+O link ativo do menu (pílula branca em "Início" / "Cardápio Completo") é resolvido sem
+transformar o cabeçalho em Client Component: o componente `ActiveRoute` grava a rota atual
+em um atributo `data-path` e o CSS usa `:has()` para aplicar o destaque.
+
+---
+
+## Estilização
+
+- **Fontes:** `Playfair Display` (títulos/display) e `Inter` (texto), carregadas com
+  `next/font/google` — sem requisição externa em runtime.
+- **Tokens de cor e espaçamento** definidos como CSS Custom Properties no topo de
+  `src/app/globals.css` (marca laranja `#e45b1f`, creme `#f8f3ec`, espresso `#17120f`…).
+- **CSS puro** em arquivo único, organizado em 10 seções comentadas.
+- **Responsivo** com breakpoints em 1080px, 960px, 720px e 560px.
+
+---
+
+## Funcionalidades extras
+
+- **Filtros por categoria** no cardápio (`Todos os Itens`, `Smash Burgers`,
+  `Porções & Entradas`, `Cafés & Shakes`) — Client Component com `aria-pressed`.
+- **Imagens otimizadas** com `next/image` (`fill`, `sizes`, `priority` no LCP).
+- **Metadados** por rota via `metadata` exportada.
+- Acessibilidade: `lang="pt-BR"`, hierarquia de headings, `aria-label` nos ícones,
+  foco visível e link de salto semântico na navegação.
+
+---
+
+## Imagens
+
+As fotos em `public/images/` são as **imagens exatas usadas no protótipo Figma**
+(extraídas do arquivo de design). A foto de Fritas Rústicas não existe no protótipo
+(placeholder quebrado), portanto foi usada uma foto de batata rústica equivalente.
+
+---
+
+© 2026 Brasa & Grão Artesanal · Terça a Domingo, 18h às 23h30
