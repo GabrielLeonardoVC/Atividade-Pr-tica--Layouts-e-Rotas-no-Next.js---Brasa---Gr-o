@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { formatPrice, type Dish } from "../data/menu";
+import { asset } from "../lib/assets";
 
 type SideCardProps = {
   dish: Dish;
@@ -11,7 +12,7 @@ export function SideCard({ dish }: SideCardProps) {
     <article className="side-card">
       <div className="side-card__media">
         <Image
-          src={dish.image}
+          src={asset(dish.image)}
           alt={dish.name}
           fill
           sizes="(max-width: 720px) 100vw, (max-width: 960px) 50vw, 25vw"

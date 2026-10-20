@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { StarIcon } from "./icons";
 import { formatPrice, type Dish } from "../data/menu";
+import { asset } from "../lib/assets";
 
 type ProductCardProps = {
   dish: Dish;
@@ -16,7 +17,7 @@ export function ProductCard({ dish, actionLabel = "+ Pedir Agora", priority }: P
     <article className="product-card">
       <div className="product-card__media">
         <Image
-          src={dish.image}
+          src={asset(dish.image)}
           alt={dish.name}
           fill
           priority={priority}

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ProductCard } from "./components/ProductCard";
 import { ArrowRight, ClockIcon, CoffeeIcon, FlameIcon, SteakIcon } from "./components/icons";
 import { featuredDishes } from "./data/menu";
+import { asset } from "./lib/assets";
 
 const DIFFERENTIALS = [
   {
@@ -69,7 +70,7 @@ export default function HomePage() {
               <div className="hero__media">
                 <div className="hero__image">
                   <Image
-                    src="/images/duplo-brasa-cheddar.jpg"
+                    src={asset("/images/duplo-brasa-cheddar.jpg")}
                     alt="Duplo smash burger de 90g com cheddar derretido, picles e molho defumado da casa"
                     fill
                     priority

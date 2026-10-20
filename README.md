@@ -16,10 +16,34 @@ npm run dev      # http://localhost:3000
 ```
 
 ```bash
-npm run build    # build de produção
-npm start        # sobe o build de produção
-npm run lint     # ESLint
+npm run build       # build de produção
+npm start           # sobe o build de produção
+npm run lint        # ESLint
+npm run typecheck   # TypeScript (tsc --noEmit)
+npm run build:static # build estático (GitHub Pages) -> pasta ./out
 ```
+
+---
+
+## Deploy no GitHub Pages
+
+O site é publicado em:
+**[gabrielleonardovc.github.io/Atividade-Pratica--Layouts-e-Rotas-no-Next.js---Brasa--e--Grao](https://gabrielleonardovc.github.io/Atividade-Pratica--Layouts-e-Rotas-no-Next.js---Brasa--e--Grao/)**
+
+Como o GitHub Pages só serve arquivos estáticos, o projeto tem um modo de
+**exportação estática** ativado por variável de ambiente:
+
+- `NEXT_STATIC_EXPORT=true` → o `next.config.ts` liga `output: "export"`, define o
+  `basePath` com o nome do repositório e desliga o otimizador de imagens.
+- `scripts/build-static.mjs` → roda o build e alinha o payload RSC das rotas
+  aninhadas (o Next exporta em `cardapio/__next.cardapio/__PAGE__.txt`, mas o
+  router pede `cardapio/__next.cardapio.__PAGE__.txt`).
+- `.github/workflows/deploy.yml` → builda e publica no Pages a cada push na `master`.
+
+> O `basePath` só é aplicado no build de deploy. Em `npm run dev` o site roda em
+> `/` normalmente e o otimizador de imagens continua ativo.
+> Os arquivos de `public/` recebem o prefixo via `src/app/lib/assets.ts`
+> (exigência do Next: _"you will need to add the `basePath` in front of `src`"_).
 
 ---
 
