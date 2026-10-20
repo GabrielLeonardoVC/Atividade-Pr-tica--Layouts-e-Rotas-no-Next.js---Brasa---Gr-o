@@ -431,9 +431,9 @@ ul {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 1.02fr 0.98fr;
+  grid-template-columns: 1.05fr 0.95fr;
   align-items: center;
-  gap: 54px;
+  gap: 56px;
 }
 
 .hero__badge {
@@ -455,12 +455,13 @@ ul {
 
 .hero__title {
   margin-top: 22px;
-  font-size: clamp(2.1rem, 4.1vw, 3rem);
-  line-height: 1.1;
+  font-size: clamp(1.95rem, 2.8vw, 2.5rem);
+  line-height: 1.14;
   color: #fff;
 }
 
 .hero__title em {
+  display: block;
   font-style: normal;
   color: var(--amber);
 }
@@ -514,7 +515,7 @@ ul {
 
 .hero__image {
   position: relative;
-  aspect-ratio: 5 / 4;
+  aspect-ratio: 4 / 3;
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: 0 24px 50px rgba(0, 0, 0, 0.45);
@@ -1051,6 +1052,13 @@ ul {
 
   .hero__panel {
     padding: 34px 24px;
+  }
+
+  /* No celular o card de preço fica abaixo da foto para não cobrir o burger */
+  .hero__card {
+    position: static;
+    margin-top: 14px;
+    justify-content: flex-start;
   }
 
   .menu-hero__panel {

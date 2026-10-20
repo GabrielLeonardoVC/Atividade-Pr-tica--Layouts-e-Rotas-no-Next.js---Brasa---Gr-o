@@ -1,7 +1,8 @@
+import type { Metadata } from "next";
 import { MenuExplorer } from "../components/MenuExplorer";
 import { sideDishes, smashDishes } from "../data/menu";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Cardápio Completo | Brasa & Grão",
   description:
     "Linha Smash & Brasa, acompanhamentos e cafeteria artesanal. Veja todos os itens do cardápio da Brasa & Grão.",

@@ -6,10 +6,12 @@ type ProductCardProps = {
   dish: Dish;
   /** Texto do botão de ação (padrão: "+ Pedir Agora") */
   actionLabel?: string;
+  /** Carrega a imagem com prioridade (primeiro card da lista) */
+  priority?: boolean;
 };
 
 /** Card vertical usado na home e na seção "Linha Smash & Brasa". */
-export function ProductCard({ dish, actionLabel = "+ Pedir Agora" }: ProductCardProps) {
+export function ProductCard({ dish, actionLabel = "+ Pedir Agora", priority }: ProductCardProps) {
   return (
     <article className="product-card">
       <div className="product-card__media">
@@ -17,6 +19,7 @@ export function ProductCard({ dish, actionLabel = "+ Pedir Agora" }: ProductCard
           src={dish.image}
           alt={dish.name}
           fill
+          priority={priority}
           sizes="(max-width: 720px) 100vw, (max-width: 960px) 50vw, 33vw"
         />
         {dish.tag && (

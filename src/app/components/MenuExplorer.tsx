@@ -57,8 +57,8 @@ export function MenuExplorer({ smashDishes, sideDishes }: MenuExplorerProps) {
           </p>
 
           <div className="product-grid" style={{ marginTop: 24 }}>
-            {visibleSmash.map((dish) => (
-              <ProductCard key={dish.slug} dish={dish} actionLabel="+ Adicionar" />
+            {visibleSmash.map((dish, index) => (
+              <ProductCard key={dish.slug} dish={dish} actionLabel="+ Adicionar" priority={index === 0} />
             ))}
           </div>
         </section>
